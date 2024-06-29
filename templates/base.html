@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ settings['site_description'] }}">
+    <meta name="keywords" content="flask, supabase, website, SEO, web development">
+    <meta property="og:title" content="{{ settings['site_name'] }}">
+    <meta property="og:description" content="{{ settings['site_description'] }}">
+    <meta property="og:image" content="{{ url_for('static', filename='images/logo.png') }}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>{{ settings['site_name'] }} - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        {% if 'user' in session %}
+        <div class="dropdown">
+            <button class="dropbtn">PDF Tools</button>
+            <div class="dropdown-content">
+                <div class="dropdown-section">
+                    <span>Compress & Convert</span>
+                    <a href="{{ url_for('compress_pdf') }}">Compress PDF</a>
+                    <a href="{{ url_for('convert_pdf', conversion_type='pdf-to-word') }}">PDF to Word</a>
+                    <a href="{{ url_for('convert_pdf', conversion_type='word-to-pdf') }}">Word to PDF</a>
+                    <a href="{{ url_for('convert_pdf', conversion_type='pdf-to-excel') }}">PDF to Excel</a>
+                    <a href="{{ url_for('convert_pdf', conversion_type='excel-to-pdf') }}">Excel to PDF</a>
+                    <a href="{{ url_for('convert_pdf', conversion_type='pdf-to-powerpoint') }}">PDF to PowerPoint</a>
+                    <a href="{{ url_for('convert_pdf', conversion_type='powerpoint-to-pdf') }}">PowerPoint to PDF</a>
+                    <a href="{{ url_for('convert_pdf', conversion_type='pdf-to-jpg') }}">PDF to JPG</a>
+                    <a href="{{ url_for('convert_pdf', conversion_type='jpg-to-pdf') }}">JPG to PDF</a>
+                </div>
+                <div class="dropdown-section">
+                    <span>Organize</span>
+                    <a href="{{ url_for('merge_pdf') }}">Merge PDF</a>
+                    <a href="{{ url_for('split_pdf') }}">Split PDF</a>
+                    <a href="{{ url_for('rotate_pdf') }}">Rotate PDF</a>
+                    <a href="{{ url_for('delete_pdf_pages') }}">Delete PDF Pages</a>
+                    <a href="{{ url_for('organize_pdf_pages') }}">Organize PDF Pages</a>
+                    <a href="{{ url_for('add_page_numbers') }}">Add Page Numbers</a>
+                    <a href="{{ url_for('add_watermark') }}">Add Watermark</a>
+                    <a href="{{ url_for('extract_pdf_images') }}">Extract PDF Images</a>
+                    <a href="{{ url_for('page_extraction') }}">Page Extraction</a>
+                </div>
+                <div class="dropdown-section">
+                    <span>Edit</span>
+                    <a href="{{ url_for('edit_pdf') }}">Edit PDF</a>
+                    <a href="{{ url_for('pdf_form_filler') }}">PDF Form Filler</a>
+                    <a href="{{ url_for('pdf_annotator') }}">PDF Annotator</a>
+                    <a href="{{ url_for('pdf_metadata_editor') }}">PDF Metadata Editor</a>
+                    <a href="{{ url_for('pdf_redaction') }}">PDF Redaction</a>
+                    <a href="{{ url_for('pdf_background_remover') }}">PDF Background Remover</a>
+                </div>
+                <div class="dropdown-section">
+                    <span>Secure</span>
+                    <a href="{{ url_for('sign_pdf') }}">Sign PDF</a>
+                    <a href="{{ url_for('unlock_pdf') }}">Unlock PDF</a>
+                    <a href="{{ url_for('protect_pdf') }}">Protect PDF</a>
+                </div>
+                <div class="dropdown-section">
+                    <span>Other Tools</span>
+                    <a href="{{ url_for('pdf_reader') }}">PDF Reader</a>
+                    <a href="{{ url_for('pdf_to_esign') }}">PDF to eSign</a>
+                    <a href="{{ url_for('pdf_to_webpage') }}">PDF to Webpage</a>
+                    <a href="{{ url_for('batch_processing') }}">Batch Processing</a>
+                    <a href="{{ url_for('api_access') }}">API Access</a>
+                    <a href="{{ url_for('pdf_to_text') }}">PDF to Text</a>
+                    <a href="{{ url_for('pdf_to_png') }}">PDF to PNG</a>
+                    <a href="{{ url_for('pdf_to_tiff') }}">PDF to TIFF</a>
+                    <a href="{{ url_for('html_to_pdf') }}">HTML to PDF</a>
+                    <a href="{{ url_for('pdf_to_rtf') }}">PDF to RTF</a>
+                    <a href="{{ url_for('pdf_to_epub') }}">PDF to EPUB</a>
+                    <a href="{{ url_for('pdf_to_bmp') }}">PDF to BMP</a>
+                    <a href="{{ url_for('ocr') }}">OCR (Optical Character Recognition)</a>
+                    <a href="{{ url_for('pdf_translator') }}">PDF Translator</a>
+                    <a href="{{ url_for('pdf_file_recovery') }}">PDF File Recovery</a>
+                    <a href="{{ url_for('pdf_thumbnail_generator') }}">PDF Thumbnail Generator</a>
+                    <a href="{{ url_for('pdf_a_conversion') }}">PDF/A Conversion</a>
+                </div>
+            </div>
+        </div>
+        <a href="{{ url_for('site_settings') }}">Settings</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </nav>
+    {% block content %}{% endblock %}
+</body>
+</html>
